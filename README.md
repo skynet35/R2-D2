@@ -7,7 +7,7 @@ Bienvenue sur le dépôt officiel du projet **AstroCan V1.3** ! Ce système éle
 ## 📸 Aperçu
 
 <p align="center">
-  <img src="Hardware/Vue_Avant_Astrocan.png" alt="Vue de Face AstroCan" width="500">
+  <img src="Vue_Avant_Astrocan.png" alt="Vue de Face AstroCan" width="500">
 </p>
 
 ## 🛠️ Caractéristiques du Système
