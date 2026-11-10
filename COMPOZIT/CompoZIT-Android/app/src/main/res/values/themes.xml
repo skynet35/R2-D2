@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Theme minimal : l'interface est entierement dessinee par Compose.
-         Il sert surtout a la fenetre affichee pendant le demarrage. -->
-    <style name="Theme.CompoZIT" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:statusBarColor">#667eea</item>
-    </style>
-</resources>
