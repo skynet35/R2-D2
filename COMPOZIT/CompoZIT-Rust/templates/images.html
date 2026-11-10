@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="alert" id="img-feedback" hidden>
+    <span data-fb-icon>✅</span>
+    <span data-fb-text></span>
+</div>
+
+<section class="stats">
+    <div class="stat">
+        <div class="stat-label">Images</div>
+        <div class="stat-value" data-img-stat="files">{{ stats.files }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Poids total</div>
+        <div class="stat-value" data-img-stat="size_label">{{ stats.size_label }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Illisibles</div>
+        <div class="stat-value" data-img-stat="broken">{{ stats.broken }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Non utilisées</div>
+        <div class="stat-value" data-img-stat="unused">{{ stats.unused }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Références cassées</div>
+        <div class="stat-value" data-img-stat="missing">{{ stats.missing }}</div>
+    </div>
+</section>
+
+<section class="card" data-images>
+    <div class="card-head">
+        <h2>Bibliothèque du dossier img/</h2>
+        <span class="spacer"></span>
+        <span class="hint" id="img-search-info"></span>
+        <button class="btn btn-sm" type="button" data-img-panel="add">➕ Ajouter une image</button>
+    </div>
+
+    <div class="card-body">
+        <div class="toolbar">
+            <div class="field">
+                <label for="img-search">Rechercher</label>
+                <input class="input" id="img-search" type="search" placeholder="Nom du fichier…">
+            </div>
+            <div class="field">
+                <label for="img-filter">Afficher</label>
+                <select class="input" id="img-filter">
+                    <option value="all">Toutes les images</option>
+                    <option value="used">Utilisées</option>
+                    <option value="unused">Non utilisées</option>
+                    <option value="broken">Illisibles</option>
+                </select>
+            </div>
+            <div class="field actions">
+                <button class="btn btn-sm btn-ghost" type="button" data-img-refresh title="Relire le dossier img/">⟳ Rafraîchir</button>
+            </div>
+        </div>
+
+        <form class="inline-panel" id="img-form" data-img-panel-form hidden>
+            <div class="form-grid cols-2">
+                <div class="field">
+                    <label for="img-file">Fichier image</label>
+                    <input id="img-file" name="image" type="file" multiple required
+                           accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml">
+                    <div class="hint">
+                        Formats acceptés : jpg, png, gif, webp, svg — 10 Mo maximum.
+                        Le contenu est vérifié : un fichier qui n'est pas une image est refusé.
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="img-name">Nom du fichier (facultatif)</label>
+                    <input id="img-name" name="name" type="text" maxlength="120" placeholder="Ex : 0603">
+                    <div class="hint">
+                        Sans nom saisi, le nom du fichier déposé est conservé.
+                        L'extension est déduite du contenu réel de l'image.
+                    </div>
+                </div>
+            </div>
+            <div class="inline-panel-actions">
+                <button class="btn" type="submit">Ajouter</button>
+                <button class="btn btn-ghost" type="button" data-img-panel-cancel>Annuler</button>
+            </div>
+        </form>
+
+        <div id="images-body">
+            {% include "_images_list.html" %}
+        </div>
+
+        <p class="hint">
+            Le dossier <span class="mono">img/</span> est partagé par toute l'application :
+            composants, boîtiers, projets, logos de fournisseurs, de clients et de casiers.
+            Une image supprimée est détachée des fiches qui la référençaient.
+        </p>
+    </div>
+</section>
+
+<!-- Modale de renommage -->
+<div class="loc-overlay" id="img-rename-modal" hidden>
+    <div class="loc-modal">
+        <div class="loc-modal-head">
+            <h3 data-img-rename-title>Renommer l'image</h3>
+            <button class="loc-modal-close" type="button" data-img-rename-close>✕</button>
+        </div>
+        <form id="img-rename-form">
+            <input type="hidden" id="img_rename_source">
+            <div class="field">
+                <label for="img_rename_name">Nouveau nom</label>
+                <input id="img_rename_name" type="text" maxlength="120" required autocomplete="off">
+                <div class="hint">
+                    Les fiches qui utilisent cette image sont mises à jour automatiquement.
+                    L'extension du fichier est conservée.
+                </div>
+            </div>
+            <div class="loc-modal-actions">
+                <button class="btn" type="submit">Renommer</button>
+                <button class="btn btn-ghost" type="button" data-img-rename-close>Annuler</button>
+            </div>
+            <div class="loc-modal-status" data-img-rename-status></div>
+        </form>
+    </div>
+</div>
+
+<!-- Modale de suppression -->
+<div class="loc-overlay" id="img-delete-modal" hidden>
+    <div class="loc-modal">
+        <div class="loc-modal-head">
+            <h3 data-img-delete-title>Supprimer l'image</h3>
+            <button class="loc-modal-close" type="button" data-img-delete-close>✕</button>
+        </div>
+        <input type="hidden" id="img_delete_source">
+        <p data-img-delete-text></p>
+        <div class="img-refs" data-img-delete-refs hidden></div>
+        <label class="check-line" data-img-detach-line hidden>
+            <input type="checkbox" id="img_delete_detach" value="1">
+            Détacher les fiches qui utilisent cette image
+        </label>
+        <div class="loc-modal-actions">
+            <button class="btn danger" type="button" data-img-delete-confirm>🗑️ Supprimer</button>
+            <button class="btn btn-ghost" type="button" data-img-delete-close>Annuler</button>
+        </div>
+        <div class="loc-modal-status" data-img-delete-status></div>
+    </div>
+</div>
+{% endblock %}

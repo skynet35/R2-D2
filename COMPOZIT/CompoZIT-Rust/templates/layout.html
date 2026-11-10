@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} · CompoZ'IT{% endblock %}
+{% block body_class %}app-shell{% endblock %}
+
+{% block body %}
+<aside class="sidebar">
+    <div class="brand">
+        <span class="brand-mark">C</span>
+        <span class="brand-text">CompoZ<em>'IT</em><small>Gestion de composants</small></span>
+    </div>
+
+    <nav class="nav">
+        <p class="nav-label">Inventaire</p>
+        <a class="nav-item {% if active_nav == 'components' %}is-active{% endif %}" href="/components">
+            <span class="nav-icon">▦</span> Composants
+        </a>
+        <a class="nav-item {% if active_nav == 'locations' %}is-active{% endif %}" href="/locations">
+            <span class="nav-icon">▤</span> Emplacements
+        </a>
+        <a class="nav-item {% if active_nav == 'categories' %}is-active{% endif %}" href="/categories">
+            <span class="nav-icon">⌗</span> Catégories
+        </a>
+        <a class="nav-item {% if active_nav == 'marking' %}is-active{% endif %}" href="/marking">
+            <span class="nav-icon">🔎</span> Marquage CMS
+        </a>
+
+        <p class="nav-label">Partenaires</p>
+        <a class="nav-item {% if active_nav == 'manufacturers' %}is-active{% endif %}" href="/manufacturers">
+            <span class="nav-icon">⛭</span> Fabricants
+        </a>
+        <a class="nav-item {% if active_nav == 'suppliers' %}is-active{% endif %}" href="/suppliers">
+            <span class="nav-icon">⇄</span> Fournisseurs
+        </a>
+
+        <p class="nav-label">Activité</p>
+        <a class="nav-item {% if active_nav == 'projects' %}is-active{% endif %}" href="/projects">
+            <span class="nav-icon">◫</span> Projets
+        </a>
+
+        <p class="nav-label">Système</p>
+        <a class="nav-item {% if active_nav == 'backup' %}is-active{% endif %}" href="/backup">
+            <span class="nav-icon">🗄</span> Sauvegardes
+        </a>
+        <a class="nav-item {% if active_nav == 'setup' %}is-active{% endif %}" href="/setup">
+            <span class="nav-icon">⛁</span> Base de données
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="status-line">
+            <span class="dot {% if connected %}on{% else %}off{% endif %}"></span>
+            {% if connected %}MySQL connecté{% else %}Base injoignable{% endif %}
+        </div>
+        <div style="margin-top: 4px;">{{ db_label }}</div>
+    </div>
+</aside>
+
+<div class="main">
+    <header class="topbar">
+        <div class="topbar-titles">
+            <h1>{{ page_title }}</h1>
+            {% if page_subtitle %}<div class="subtitle">{{ page_subtitle }}</div>{% endif %}
+        </div>
+        <div class="topbar-actions">
+            <button class="icon-btn" id="theme-toggle" type="button" title="Changer de thème">🌙</button>
+            <div class="user-chip">
+                <span class="user-avatar">{{ user_initial }}</span>
+                <span>
+                    <span style="display: block;">{{ user_email }}</span>
+                    <span class="role">{{ user_role_label }}</span>
+                </span>
+            </div>
+            <form method="post" action="/logout">
+                <button class="btn btn-ghost btn-sm" type="submit">Déconnexion</button>
+            </form>
+            <form method="post" action="/quit"
+                  data-confirm="Arrêter CompoZ'IT ? Le serveur va se fermer et l'interface ne répondra plus.">
+                <button class="btn btn-ghost btn-sm" type="submit" title="Arrêter le serveur CompoZ'IT">Quitter</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+{% endblock %}

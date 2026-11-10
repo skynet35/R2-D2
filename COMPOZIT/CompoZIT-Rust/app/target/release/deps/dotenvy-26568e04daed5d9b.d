@@ -1,0 +1,11 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\dotenvy-26568e04daed5d9b.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\errors.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\find.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\iter.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\parse.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libdotenvy-26568e04daed5d9b.rlib: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\errors.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\find.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\iter.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\parse.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libdotenvy-26568e04daed5d9b.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\errors.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\find.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\iter.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\parse.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\errors.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\find.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\iter.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\dotenvy-0.15.7\src\parse.rs:

@@ -1,0 +1,12 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\tinystr-0ae032e551d5a0bb.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\macros.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\ascii.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\asciibyte.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\error.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\int_ops.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\unvalidated.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\ule.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libtinystr-0ae032e551d5a0bb.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\macros.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\ascii.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\asciibyte.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\error.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\int_ops.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\unvalidated.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\ule.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\macros.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\ascii.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\asciibyte.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\error.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\int_ops.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\unvalidated.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tinystr-0.8.5\src\ule.rs:

@@ -1,0 +1,11 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\inout-67a82e6abf639cfd.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\errors.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout_buf.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\reserved.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libinout-67a82e6abf639cfd.rlib: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\errors.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout_buf.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\reserved.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libinout-67a82e6abf639cfd.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\errors.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout_buf.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\reserved.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\errors.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\inout_buf.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\inout-0.2.5\src\reserved.rs:

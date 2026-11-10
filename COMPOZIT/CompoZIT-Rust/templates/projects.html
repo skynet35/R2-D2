@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="alert" id="prj-feedback" hidden>
+    <span data-fb-icon>✅</span>
+    <span data-fb-text></span>
+</div>
+
+<section class="stats">
+    <div class="stat">
+        <div class="stat-label">Projets</div>
+        <div class="stat-value" data-prj-stat="projects">{{ stats.projects }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">En cours</div>
+        <div class="stat-value" data-prj-stat="active">{{ stats.active }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Composants mobilisés</div>
+        <div class="stat-value" data-prj-stat="components">{{ stats.components }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Terminés</div>
+        <div class="stat-value" data-prj-stat="finished">{{ stats.finished }}</div>
+    </div>
+</section>
+
+<section class="card" data-projects>
+    <div class="card-head">
+        <h2>Portefeuille de projets</h2>
+        <span class="spacer"></span>
+        <button class="btn btn-sm" type="button" data-prj-panel="add">➕ Nouveau projet</button>
+    </div>
+
+    <div class="card-body">
+        <div class="toolbar">
+            <div class="field">
+                <label for="prj-search">Rechercher</label>
+                <input class="input" id="prj-search" type="search" placeholder="Nom, description, statut…">
+            </div>
+            <div class="field actions">
+                <span class="hint" id="prj-search-info"></span>
+            </div>
+        </div>
+
+        <form class="inline-panel" id="prj-form" data-prj-panel-form hidden>
+            <div class="form-grid cols-2">
+                <div class="field">
+                    <label for="project_name">Nom du projet</label>
+                    <input id="project_name" name="name" type="text" maxlength="255" required
+                           placeholder="Ex : Station météo connectée">
+                </div>
+                <div class="field">
+                    <label for="project_status">Statut</label>
+                    <select id="project_status" name="status">
+                        {% for status in statuses %}
+                        <option value="{{ status }}"{% if status == 'En cours' %} selected{% endif %}>{{ status }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field span-2">
+                    <label for="project_description">Description</label>
+                    <textarea id="project_description" name="description" rows="3" maxlength="5000"
+                              placeholder="Objectif, périmètre, échéances…"></textarea>
+                </div>
+            </div>
+            <div class="inline-panel-actions">
+                <button class="btn" type="submit">Créer le projet</button>
+                <button class="btn btn-ghost" type="button" data-prj-panel-cancel>Annuler</button>
+            </div>
+        </form>
+
+        <div id="projects-list">
+            {% include "_projects_list.html" %}
+        </div>
+    </div>
+</section>
+
+<!-- Modale de modification -->
+<div class="loc-overlay" id="prj-edit-modal" hidden>
+    <div class="loc-modal is-wide">
+        <div class="loc-modal-head">
+            <h3 data-edit-title>Modifier le projet</h3>
+            <button class="loc-modal-close" type="button" data-edit-close>✕</button>
+        </div>
+        <form id="prj-edit-form">
+            <input type="hidden" id="edit_project_id" name="project_id">
+            <div class="form-grid cols-2">
+                <div class="field">
+                    <label for="edit_prj_name">Nom du projet</label>
+                    <input id="edit_prj_name" name="name" type="text" maxlength="255" required>
+                </div>
+                <div class="field">
+                    <label for="edit_prj_status">Statut</label>
+                    <select id="edit_prj_status" name="status">
+                        {% for status in statuses %}
+                        <option value="{{ status }}">{{ status }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field span-2">
+                    <label for="edit_prj_description">Description</label>
+                    <textarea id="edit_prj_description" name="description" rows="4" maxlength="5000"></textarea>
+                </div>
+            </div>
+            <div class="loc-modal-actions">
+                <button class="btn" type="submit">Enregistrer</button>
+                <button class="btn btn-ghost" type="button" data-edit-close>Annuler</button>
+            </div>
+            <div class="loc-modal-status" data-edit-status></div>
+        </form>
+    </div>
+</div>
+
+<!-- Modale de suppression -->
+<div class="loc-overlay" id="prj-delete-modal" hidden>
+    <div class="loc-modal">
+        <div class="loc-modal-head">
+            <h3 data-delete-title>Supprimer le projet</h3>
+            <button class="loc-modal-close" type="button" data-delete-close>✕</button>
+        </div>
+        <p data-delete-text></p>
+        <div class="loc-modal-actions">
+            <button class="btn danger" type="button" data-delete-confirm>🗑️ Supprimer</button>
+            <button class="btn btn-ghost" type="button" data-delete-close>Annuler</button>
+        </div>
+        <div class="loc-modal-status" data-delete-status></div>
+    </div>
+</div>
+{% endblock %}

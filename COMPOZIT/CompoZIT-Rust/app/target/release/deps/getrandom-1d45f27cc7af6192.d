@@ -1,0 +1,11 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\getrandom-1d45f27cc7af6192.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\backends.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\error.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\util.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\error_std_impls.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\../README.md C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\backends\windows.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libgetrandom-1d45f27cc7af6192.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\backends.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\error.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\util.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\error_std_impls.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\../README.md C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\backends\windows.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\backends.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\error.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\util.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\error_std_impls.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\../README.md:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\getrandom-0.4.3\src\backends\windows.rs:

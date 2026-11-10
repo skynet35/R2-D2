@@ -1,0 +1,14 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\thiserror-fcd38803155430d6.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\aserror.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\display.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\var.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\private.rs C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\build\thiserror-fee864310a1b7a19\out/private.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libthiserror-fcd38803155430d6.rlib: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\aserror.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\display.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\var.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\private.rs C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\build\thiserror-fee864310a1b7a19\out/private.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libthiserror-fcd38803155430d6.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\aserror.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\display.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\var.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\private.rs C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\build\thiserror-fee864310a1b7a19\out/private.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\aserror.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\display.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\var.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.21\src\private.rs:
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\build\thiserror-fee864310a1b7a19\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\Users\\skyne\\Desktop\\TRAE\\CompoZIT-Portable-Site\\app\\target\\release\\build\\thiserror-fee864310a1b7a19\\out

@@ -1,0 +1,62 @@
+{% if categories %}
+<div class="cat-grid">
+    {% for c in categories %}
+    <article class="cat-card" data-cat-card="{{ c.id }}" data-cat-name="{{ c.name|lower }}">
+        <header class="cat-head">
+            <button class="cat-toggle" type="button" data-cat-toggle="{{ c.id }}">
+                <span class="cat-chevron">▶</span>
+                <span class="cat-title">
+                    {{ c.name }}
+                    <em class="cat-id">ID {{ c.id }}</em>
+                </span>
+            </button>
+            <div class="cat-badges">
+                <span class="badge info">🏷️ {{ c.subs }} sous-cat.</span>
+                <span class="badge">📦 {{ c.components }} pièce{{ 's' if c.components > 1 else '' }}</span>
+            </div>
+            <div class="cat-actions">
+                <button class="icon-btn" type="button" title="Renommer" data-cat-rename="{{ c.id }}" data-cat-label="{{ c.name }}">✏️</button>
+                {% if c.subs > 0 %}
+                <button class="icon-btn" type="button" disabled title="Suppression impossible : cette catégorie contient des sous-catégories">🔒</button>
+                {% else %}
+                <button class="icon-btn" type="button" title="Supprimer" data-cat-delete="{{ c.id }}" data-cat-label="{{ c.name }}">🗑️</button>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="cat-body" data-cat-body="{{ c.id }}" hidden>
+            {% if c.subcategories %}
+            <ul class="cat-subs">
+                {% for s in c.subcategories %}
+                <li class="cat-sub" data-cat-sub="{{ s.id }}" data-cat-sub-name="{{ s.name|lower }}">
+                    <span class="fill-dot {{ s.level }}" title="Occupation"></span>
+                    <span class="cat-sub-name">
+                        {{ s.name }}
+                        <em class="cat-sub-id">#{{ s.id }}</em>
+                    </span>
+                    <span class="cat-sub-count">{{ s.components }} composant{{ 's' if s.components > 1 else '' }}</span>
+                    <span class="cat-sub-actions">
+                        <button class="btn btn-sm btn-ghost" type="button" title="Renommer" data-sub-rename="{{ s.id }}" data-sub-label="{{ s.name }}">✏️</button>
+                        {% if s.components > 0 %}
+                        <button class="btn btn-sm btn-ghost" type="button" disabled title="Utilisée par {{ s.components }} composant(s) : renommage uniquement">🔒</button>
+                        {% else %}
+                        <button class="btn btn-sm btn-danger" type="button" title="Supprimer" data-sub-delete="{{ s.id }}" data-sub-label="{{ s.name }}">🗑️</button>
+                        {% endif %}
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="cat-sub-empty">Aucune sous-catégorie pour l'instant.</p>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty">
+    <span class="empty-icon">🗂️</span>
+    <strong>Aucune catégorie créée</strong>
+    <p>Commencez par ajouter une catégorie principale, puis ses sous-catégories.</p>
+</div>
+{% endif %}

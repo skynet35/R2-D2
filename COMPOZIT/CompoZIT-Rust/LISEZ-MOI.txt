@@ -1,0 +1,87 @@
+CompoZ'IT — version Rust (portable, connexion au choix)
+=======================================================
+
+1) PREMIER LANCEMENT
+   - Copie ce dossier où tu veux (par exemple C:\CompoZIT). Évite un dossier
+     synchronisé (OneDrive, Dropbox) : les images et les pièces jointes des
+     projets y sont écrites.
+   - Double-clic sur CompoZIT.exe : l'interface s'ouvre dans le navigateur par
+     défaut, sur http://127.0.0.1:8080. Aucune fenêtre ne s'affiche en plus.
+   - Si une autre instance de CompoZ'IT est déjà lancée, le port 8080 est
+     occupé : ferme-la avant d'ouvrir celle-ci.
+   - Pour arrêter l'application : bouton « Quitter » en haut à droite de
+     l'interface (confirmation demandée).
+
+2) CHOIX DE LA CONNEXION
+   L'écran « Base de données » propose deux modes, à choisir selon l'endroit où
+   se trouve la base :
+
+   a) Base de données MySQL (connexion directe)
+      - L'application interroge elle-même le serveur MySQL / MariaDB.
+      - Renseigne host / port / user / password / database, puis
+        « Tester et enregistrer ».
+      - Le serveur doit accepter les connexions venues de ce PC.
+
+   b) Site en ligne (adapté à un hébergement mutualisé)
+      - Renseigne l'adresse du site (https://...) et l'identifiant / mot de
+        passe habituels du site, puis « Tester et enregistrer ».
+      - Aucune connexion MySQL n'est alors nécessaire : CompoZ'IT relaie les
+        écrans du site et garde la session ouverte. Tout reste accessible —
+        création, modification, suppression, envoi de fichiers — y compris
+        lorsque l'hébergement refuse les connexions MySQL distantes.
+      - Les boutons « Réglages » et « Arrêter CompoZ'IT » restent affichés en
+        bas à droite des pages du site.
+
+   Le mode retenu est celui du démarrage : en changer ferme l'application,
+   qu'il suffit ensuite de relancer.
+
+3) BASE DE DONNÉES (mode MySQL uniquement)
+   L'application ne contient pas de serveur MySQL : elle se connecte à un
+   serveur MySQL / MariaDB existant.
+
+   a) Un serveur MySQL est déjà installé sur ce PC (XAMPP, MySQL, MariaDB…)
+      - Renseigne host / port / user / password / database dans config.toml,
+        ou passe par l'écran « Base de données » proposé à l'ouverture.
+
+   b) Installation vierge
+      - Installe XAMPP (ou MariaDB) et démarre MySQL.
+      - Importe la base fournie :
+            mysql -u root -p < "base_de_donnees\compozit.sql"
+        ou, depuis phpMyAdmin : Importer… > base_de_donnees\compozit.sql
+      - Le fichier contient la structure ET les données des tables utilisées
+        par cette version (utilisateurs, composants, emplacements, projets,
+        fournisseurs, catégories, fabricants, boîtiers…).
+
+   c) Recherche par code de marquage (option)
+      - La page « Marquage CMS » retrouve un composant à partir du code
+        imprimé sur son boîtier. Elle s'appuie sur une table locale
+        (marking_codes) livrée à part :
+            mysql -u root -p compozit < "base_de_donnees\marking_codes.sql"
+        ou, depuis phpMyAdmin : Importer… > base_de_donnees\marking_codes.sql
+      - Import volumineux (≈ 60 Mo, 420 000 lignes) : prévoir quelques minutes.
+      - Sans cet import, l'application fonctionne normalement ; seule la page
+        « Marquage CMS » affiche un bandeau d'avertissement.
+
+4) RÉGLAGE RÉSEAU (option)
+   Dans config.toml, [server] port = 8080. Mettre host à "0.0.0.0" rend
+   l'application accessible aux autres postes du réseau local.
+
+5) CONTENU DU DOSSIER
+   CompoZIT.exe        le programme (aucun runtime à installer)
+   config.toml         réglages serveur + base de données + site en ligne
+   api.toml            clés des fournisseurs (Nexar, Farnell, TME, LCSC…)
+   templates\ static\  interface : gabarits, styles, scripts
+   img\                images des composants et logos des fournisseurs
+   datasheets\         fiches techniques PDF
+   projets\            images de couverture et pièces jointes des projets
+   base_de_donnees\    exports SQL (base Rust + table de marquage CMS)
+
+6) SAUVEGARDE
+   À sauvegarder : la base MySQL (export) + les dossiers img\, datasheets\
+   et projets\. En mode « site en ligne », ces dossiers restent ceux du site :
+   la sauvegarde se fait côté hébergement.
+
+7) EN CAS DE PROBLÈME
+   Lance CompoZIT.exe depuis l'invite de commandes : les messages de
+   diagnostic s'affichent dans la fenêtre. La variable d'environnement
+   RUST_LOG permet d'augmenter le détail (par exemple RUST_LOG=debug).

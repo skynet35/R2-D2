@@ -1,0 +1,29 @@
+{% extends "plain.html" %}
+
+{% block content %}
+<div class="panel">
+    <div class="panel-head">
+        <span class="brand-mark">C</span>
+        <div>
+            <h1>CompoZ<em style="font-style: normal; color: var(--accent);">'IT</em></h1>
+            <div class="subtitle">Application arrêtée</div>
+        </div>
+    </div>
+
+    {% if reason %}
+    <div class="alert info" style="margin-bottom: 14px;">
+        <span>ℹ️</span>
+        <span>{{ reason }}</span>
+    </div>
+    {% else %}
+    <div class="alert ok" style="margin-bottom: 18px;">
+        <span>✓</span>
+        <span>Le serveur est arrêté, la base de données est libérée. Vous pouvez fermer cet onglet.</span>
+    </div>
+    {% endif %}
+
+    <div class="foot-note">
+        Pour relancer CompoZ'IT, double-cliquez à nouveau sur <strong>CompoZIT.exe</strong>.
+    </div>
+</div>
+{% endblock %}

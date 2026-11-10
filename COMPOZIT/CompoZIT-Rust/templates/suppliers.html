@@ -1,0 +1,189 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="alert" id="sup-feedback" hidden>
+    <span data-fb-icon>✅</span>
+    <span data-fb-text></span>
+</div>
+
+<section class="stats">
+    <div class="stat">
+        <div class="stat-label">Fournisseurs</div>
+        <div class="stat-value" data-sup-stat="suppliers">{{ stats.suppliers }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Composants rattachés</div>
+        <div class="stat-value" data-sup-stat="linked">{{ stats.linked }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Sans fournisseur</div>
+        <div class="stat-value" data-sup-stat="unattached">{{ stats.unattached }}</div>
+    </div>
+</section>
+
+<section class="card" data-suppliers>
+    <div class="card-head">
+        <h2>Carnet d'adresses</h2>
+        <span class="spacer"></span>
+        <button class="btn btn-sm" type="button" data-sup-panel="add">➕ Fournisseur</button>
+    </div>
+
+    <div class="card-body">
+        <div class="toolbar">
+            <div class="field">
+                <label for="sup-search">Rechercher</label>
+                <input class="input" id="sup-search" type="search" placeholder="Nom, contact, courriel, ville…">
+            </div>
+            <div class="field actions">
+                <span class="hint" id="sup-search-info"></span>
+            </div>
+        </div>
+
+        <form class="inline-panel" id="sup-form" data-sup-panel-form hidden>
+            <div class="form-grid cols-3">
+                <div class="field">
+                    <label for="sup_name">Nom du fournisseur</label>
+                    <input id="sup_name" name="name" type="text" maxlength="255" required
+                           placeholder="Ex : Mouser Electronics">
+                </div>
+                <div class="field">
+                    <label for="sup_contact">Contact</label>
+                    <input id="sup_contact" name="contact_person" type="text" maxlength="255"
+                           placeholder="Interlocuteur habituel">
+                </div>
+                <div class="field">
+                    <label for="sup_website">Site web</label>
+                    <input id="sup_website" name="website" type="text" maxlength="255"
+                           placeholder="https://www.exemple.com">
+                </div>
+                <div class="field">
+                    <label for="sup_email">Courriel</label>
+                    <input id="sup_email" name="email" type="text" maxlength="255"
+                           placeholder="contact@exemple.com">
+                </div>
+                <div class="field">
+                    <label for="sup_phone">Téléphone</label>
+                    <input id="sup_phone" name="phone" type="text" maxlength="50"
+                           placeholder="+33 1 23 45 67 89">
+                </div>
+                <div class="field">
+                    <label for="sup_country">Pays</label>
+                    <input id="sup_country" name="country" type="text" maxlength="100" placeholder="France">
+                </div>
+                <div class="field span-2">
+                    <label for="sup_address">Adresse</label>
+                    <textarea id="sup_address" name="address" rows="2"
+                              placeholder="Adresse complète du fournisseur"></textarea>
+                </div>
+                <div class="field">
+                    <label for="sup_notes">Notes</label>
+                    <textarea id="sup_notes" name="notes" rows="2"
+                              placeholder="Remarques, conditions, délais…"></textarea>
+                </div>
+                <div class="field span-2">
+                    <label for="sup_logo_url">Logo</label>
+                    <div class="logo-field">
+                        <input id="sup_logo_url" name="logo_url" type="text" maxlength="500"
+                               placeholder="https://www.exemple.com/logo.png">
+                        <input id="sup_logo" name="logo" type="file"
+                               accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml">
+                    </div>
+                    <div class="hint">Un fichier déposé est recopié dans le dossier `img/` et remplace l'URL.</div>
+                </div>
+            </div>
+            <div class="inline-panel-actions">
+                <button class="btn" type="submit">Ajouter le fournisseur</button>
+                <button class="btn btn-ghost" type="button" data-sup-panel-cancel>Annuler</button>
+            </div>
+        </form>
+
+        <div id="suppliers-list">
+            {% include "_suppliers_list.html" %}
+        </div>
+    </div>
+</section>
+
+<!-- Modale de modification -->
+<div class="loc-overlay" id="sup-edit-modal" hidden>
+    <div class="loc-modal is-wide">
+        <div class="loc-modal-head">
+            <h3 data-edit-title>Modifier le fournisseur</h3>
+            <button class="loc-modal-close" type="button" data-edit-close>✕</button>
+        </div>
+        <form id="sup-edit-form">
+            <input type="hidden" id="edit_supplier_id" name="supplier_id">
+            <div class="form-grid cols-2">
+                <div class="field">
+                    <label for="edit_name">Nom du fournisseur</label>
+                    <input id="edit_name" name="name" type="text" maxlength="255" required>
+                </div>
+                <div class="field">
+                    <label for="edit_contact">Contact</label>
+                    <input id="edit_contact" name="contact_person" type="text" maxlength="255">
+                </div>
+                <div class="field">
+                    <label for="edit_website">Site web</label>
+                    <input id="edit_website" name="website" type="text" maxlength="255">
+                </div>
+                <div class="field">
+                    <label for="edit_email">Courriel</label>
+                    <input id="edit_email" name="email" type="text" maxlength="255">
+                </div>
+                <div class="field">
+                    <label for="edit_phone">Téléphone</label>
+                    <input id="edit_phone" name="phone" type="text" maxlength="50">
+                </div>
+                <div class="field">
+                    <label for="edit_country">Pays</label>
+                    <input id="edit_country" name="country" type="text" maxlength="100">
+                </div>
+                <div class="field span-2">
+                    <label for="edit_address">Adresse</label>
+                    <textarea id="edit_address" name="address" rows="2"></textarea>
+                </div>
+                <div class="field span-2">
+                    <label for="edit_notes">Notes</label>
+                    <textarea id="edit_notes" name="notes" rows="2"></textarea>
+                </div>
+                <div class="field span-2">
+                    <label for="edit_logo_url">Logo</label>
+                    <div class="logo-field">
+                        <span class="logo-preview" data-logo-preview>🏢</span>
+                        <input id="edit_logo_url" name="logo_url" type="text" maxlength="500"
+                               placeholder="https://www.exemple.com/logo.png">
+                        <input id="edit_logo_file" name="logo" type="file"
+                               accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml">
+                    </div>
+                    <label class="check-line" for="edit_logo_clear">
+                        <input type="checkbox" id="edit_logo_clear" name="logo_clear" value="1">
+                        Retirer le logo
+                    </label>
+                </div>
+            </div>
+            <div class="loc-modal-actions">
+                <button class="btn" type="submit">Enregistrer</button>
+                <button class="btn btn-ghost" type="button" data-edit-close>Annuler</button>
+            </div>
+            <div class="loc-modal-status" data-edit-status></div>
+        </form>
+    </div>
+</div>
+
+<!-- Modale de suppression -->
+<div class="loc-overlay" id="sup-delete-modal" hidden>
+    <div class="loc-modal">
+        <div class="loc-modal-head">
+            <h3 data-delete-title>Supprimer le fournisseur</h3>
+            <button class="loc-modal-close" type="button" data-delete-close>✕</button>
+        </div>
+        <p data-delete-text></p>
+        <div class="loc-modal-actions">
+            <button class="btn danger" type="button" data-delete-confirm>🗑️ Supprimer</button>
+            <button class="btn btn-ghost" type="button" data-delete-close>Annuler</button>
+        </div>
+        <div class="loc-modal-status" data-delete-status></div>
+    </div>
+</div>
+
+<script type="application/json" id="suppliers-data">{{ suppliers_json|tojson }}</script>
+{% endblock %}

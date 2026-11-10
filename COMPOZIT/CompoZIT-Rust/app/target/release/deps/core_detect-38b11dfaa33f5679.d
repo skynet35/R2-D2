@@ -1,0 +1,11 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\core_detect-38b11dfaa33f5679.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\macros.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\arch\x86.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\os\x86.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\cache.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libcore_detect-38b11dfaa33f5679.rlib: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\macros.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\arch\x86.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\os\x86.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\cache.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libcore_detect-38b11dfaa33f5679.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\macros.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\arch\x86.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\os\x86.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\cache.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\macros.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\arch\x86.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\os\x86.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\core_detect-1.0.0\src\cache.rs:

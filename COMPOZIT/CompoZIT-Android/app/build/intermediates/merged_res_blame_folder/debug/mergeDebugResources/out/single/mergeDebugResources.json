@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "fr.compozit.mobile.app-debug-48:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "fr.compozit.mobile.app-main-50:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "fr.compozit.mobile.app-debug-48:/drawable_ic_launcher_background.xml.flat",
+        "source": "fr.compozit.mobile.app-main-50:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "fr.compozit.mobile.app-debug-48:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "fr.compozit.mobile.app-main-50:/drawable/ic_launcher_foreground.xml"
+    }
+]

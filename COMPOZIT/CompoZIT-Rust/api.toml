@@ -1,0 +1,58 @@
+# Identifiants des API fournisseurs de CompoZ'IT.
+# Ce fichier est écrit par l'écran « API fournisseurs ».
+
+[nexar]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = ""
+search_limit = 5
+
+[mouser]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = ""
+search_limit = 10
+
+[farnell]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = "fr.farnell.com"
+search_limit = 10
+
+[digikey]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = ""
+search_limit = 10
+
+[tme]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = ""
+search_limit = 10
+
+[lcsc]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = ""
+search_limit = 10
+
+[rs]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = "fr.rs-online.com"
+search_limit = 10
+
+[datasheets]
+client_id = ""
+client_secret = ""
+api_key = ""
+store_id = ""
+search_limit = 10

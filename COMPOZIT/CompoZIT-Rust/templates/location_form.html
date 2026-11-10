@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if error %}
+<div class="alert error"><span>⚠️</span><span>{{ error }}</span></div>
+{% endif %}
+
+<form class="card form-card" method="post" action="{{ form_action }}" enctype="multipart/form-data" id="location-form">
+    <div class="card-head">
+        <h2>{% if mode == 'create' %}Nouvel emplacement{% else %}Fiche de l'emplacement{% endif %}</h2>
+        <span class="spacer"></span>
+        <a class="btn btn-ghost btn-sm" href="/locations">↩ Retour aux emplacements</a>
+    </div>
+
+    <div class="card-body">
+        <div class="form-layout">
+            <div class="form-main">
+                <section class="form-section">
+                    <h3>Coordonnées</h3>
+                    <div class="form-grid cols-3">
+                        <div class="field">
+                            <label for="casier">Casier *</label>
+                            <input type="text" id="casier" name="casier" required maxlength="255"
+                                   placeholder="Ex: A, B, C1" value="{{ location.casier }}">
+                        </div>
+                        <div class="field">
+                            <label for="tiroir">Tiroir *</label>
+                            <input type="text" id="tiroir" name="tiroir" required maxlength="255"
+                                   placeholder="Ex: 1, 2, T1" value="{{ location.tiroir }}">
+                        </div>
+                        <div class="field">
+                            <label for="compartiment">Compartiment *</label>
+                            <input type="text" id="compartiment" name="compartiment" required maxlength="255"
+                                   placeholder="Ex: 1, 2, 3, 4" value="{{ location.compartiment }}">
+                        </div>
+                    </div>
+                    <div class="field" style="margin-top: 14px;">
+                        <label for="description">Description (optionnel)</label>
+                        <textarea id="description" name="description" rows="3"
+                                  placeholder="Précisions sur le contenu de cet emplacement…">{{ location.description }}</textarea>
+                    </div>
+                    <div class="hint">
+                        Code final : <span class="mono" id="location-code">{{ location.casier }}{{ location.tiroir }}-{{ location.compartiment }}</span>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h3>Type de rangement</h3>
+                    <div class="field">
+                        <label for="storage_type">Type</label>
+                        <select id="storage_type" name="storage_type">
+                            {% for type in storage_types %}
+                            <option value="{{ type.key }}" {% if location.storage_type == type.key %}selected{% endif %}>{{ type.icon }} {{ type.label }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="hint">Le type s'applique à tout le conteneur : tous les emplacements du casier {{ location.casier or '« … »' }}.</div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="form-aside">
+                <section class="form-section">
+                    <h3>Emplacement dans l'armoire</h3>
+                    <div class="loc-preview" id="loc-preview">
+                        <span class="loc-preview-badge" data-loc-preview-icon>🗄️</span>
+                        <span class="loc-preview-code mono" data-loc-preview-code>{{ location.casier }}{{ location.tiroir }}-{{ location.compartiment }}</span>
+                    </div>
+                    <p class="hint">Aperçu du code tel qu'il apparaîtra dans la liste et sur les fiches composants.</p>
+                </section>
+
+                {% if mode == 'edit' %}
+                <section class="form-section">
+                    <h3>Logo du conteneur</h3>
+                    <div class="image-preview" id="logo-preview">
+                        {% if location.logo_src %}
+                        <img src="{{ location.logo_src }}" alt="Logo du conteneur" id="current-logo">
+                        {% else %}
+                        <div class="image-placeholder" id="current-logo-placeholder">Aucun logo</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field" style="margin-top: 14px;">
+                        <label for="logo_action">Logo</label>
+                        <select id="logo_action" name="logo_action">
+                            <option value="keep">Conserver le logo actuel</option>
+                            <option value="existing">Choisir dans la bibliothèque</option>
+                            <option value="upload">Importer un fichier</option>
+                            <option value="none">Aucun logo</option>
+                        </select>
+                    </div>
+
+                    <div class="field" id="logo_existing_group" hidden>
+                        <label>Bibliothèque d'images</label>
+                        <input type="search" id="logo-filter" placeholder="Filtrer…" autocomplete="off">
+                        <div class="image-grid" id="logo-images">
+                            {% for image in images %}
+                            <button type="button" data-logo-image="{{ image }}" title="{{ image }}">
+                                <img src="/img/{{ image }}" alt="" loading="lazy">
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="field" id="logo_upload_group" hidden>
+                        <label for="logo">Fichier image</label>
+                        <input type="file" id="logo" name="logo" accept="image/*">
+                        <div class="hint">JPG, PNG, GIF, WEBP ou SVG. Le fichier déposé remplace le logo actuel.</div>
+                    </div>
+
+                    <input type="hidden" id="existing_logo" name="existing_logo" value="">
+                    <input type="hidden" id="delete_logo" name="delete_logo" value="">
+                </section>
+                {% else %}
+                <section class="form-section">
+                    <h3>Logo du conteneur</h3>
+                    <p class="hint">Le logo pourra être défini après la création, depuis la fiche de l'emplacement.</p>
+                </section>
+                {% endif %}
+            </aside>
+        </div>
+    </div>
+
+    <div class="card-foot">
+        <button class="btn" type="submit">✔ {{ submit_label }}</button>
+        <a class="btn btn-ghost" href="/locations">Annuler</a>
+        <span class="spacer"></span>
+        {% if mode == 'edit' %}<span class="hint">Identifiant #{{ location.id }}</span>{% endif %}
+    </div>
+</form>
+{% endblock %}

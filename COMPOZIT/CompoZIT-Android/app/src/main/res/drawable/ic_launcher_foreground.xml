@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Puce electronique : carre central, pattes et trait de circuit. -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M39,39h30v30h-30z" />
+    <path
+        android:fillColor="#FF667EEA"
+        android:pathData="M45,45h18v18h-18z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M30,45h9v4h-9zM30,52h9v4h-9zM30,59h9v4h-9zM69,45h9v4h-9zM69,52h9v4h-9zM69,59h9v4h-9zM45,30h4v9h-4zM52,30h4v9h-4zM59,30h4v9h-4zM45,69h4v9h-4zM52,69h4v9h-4zM59,69h4v9h-4z" />
+</vector>

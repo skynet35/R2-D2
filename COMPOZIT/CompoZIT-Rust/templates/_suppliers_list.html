@@ -1,0 +1,66 @@
+{% if suppliers %}
+<div class="table-wrap">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Fournisseur</th>
+                <th>Site web</th>
+                <th>Courriel</th>
+                <th>Téléphone</th>
+                <th class="numeric">Composants</th>
+                <th class="actions-head">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in suppliers %}
+            <tr data-sup-row="{{ s.id }}"
+                data-sup-name="{{ (s.name ~ ' ' ~ s.contact ~ ' ' ~ s.email ~ ' ' ~ s.country ~ ' ' ~ s.phone)|lower }}">
+                <td>
+                    <div class="cell-entity">
+                        {% if s.logo %}
+                        <img class="supplier-logo" src="{{ s.logo }}" alt="" loading="lazy">
+                        {% else %}
+                        <span class="supplier-logo is-placeholder" title="Aucun logo">🏢</span>
+                        {% endif %}
+                        <div class="cell-entity-text">
+                            <span class="cell-name">{{ s.name }}</span>
+                            {% if s.contact %}<div class="cell-sub">{{ s.contact }}</div>{% endif %}
+                            {% if s.country %}<div class="cell-sub">📍 {{ s.country }}</div>{% endif %}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {% if s.website %}
+                    <a href="{{ s.website }}" target="_blank" rel="noopener">🌐 Visiter</a>
+                    {% else %}<span class="cell-sub">—</span>{% endif %}
+                </td>
+                <td>
+                    {% if s.email %}
+                    <a href="mailto:{{ s.email }}">{{ s.email }}</a>
+                    {% else %}<span class="cell-sub">—</span>{% endif %}
+                </td>
+                <td class="nowrap">{{ s.phone if s.phone else '—' }}</td>
+                <td class="numeric">
+                    <span class="badge {% if s.components > 0 %}info{% endif %}">📦 {{ s.components }}</span>
+                </td>
+                <td>
+                    <div class="actions">
+                        <button class="btn btn-sm btn-ghost" type="button" title="Modifier"
+                                data-sup-edit="{{ s.id }}">✏️</button>
+                        <button class="btn btn-sm danger" type="button" title="Supprimer"
+                                data-sup-delete="{{ s.id }}" data-sup-label="{{ s.name }}"
+                                data-sup-count="{{ s.components }}">🗑️</button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty">
+    <span class="empty-icon">⇄</span>
+    <strong>Aucun fournisseur enregistré</strong>
+    <p>Ajoutez un fournisseur pour conserver ses coordonnées et rattacher vos composants.</p>
+</div>
+{% endif %}

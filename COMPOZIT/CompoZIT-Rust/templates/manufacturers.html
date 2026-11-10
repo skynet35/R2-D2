@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="alert" id="mfr-feedback" hidden>
+    <span data-fb-icon>✅</span>
+    <span data-fb-text></span>
+</div>
+
+<section class="stats">
+    <div class="stat">
+        <div class="stat-label">Fabricants</div>
+        <div class="stat-value" data-mfr-stat="manufacturers">{{ stats.manufacturers }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Composants référencés</div>
+        <div class="stat-value" data-mfr-stat="linked">{{ stats.linked }}</div>
+    </div>
+    <div class="stat">
+        <div class="stat-label">Sans fabricant</div>
+        <div class="stat-value" data-mfr-stat="unattached">{{ stats.unattached }}</div>
+    </div>
+</section>
+
+<section class="card" data-manufacturers>
+    <div class="card-head">
+        <h2>Marques référencées</h2>
+        <span class="spacer"></span>
+        <button class="btn btn-sm" type="button" data-mfr-panel="add">➕ Fabricant</button>
+    </div>
+
+    <div class="card-body">
+        <div class="toolbar">
+            <div class="field">
+                <label for="mfr-search">Rechercher</label>
+                <input class="input" id="mfr-search" type="search" placeholder="Nom du fabricant…">
+            </div>
+            <div class="field actions">
+                <span class="hint" id="mfr-search-info"></span>
+            </div>
+        </div>
+
+        <form class="inline-panel" id="mfr-form" data-mfr-panel-form hidden>
+            <div class="form-grid cols-2">
+                <div class="field">
+                    <label for="manufacturer_name">Nom du fabricant</label>
+                    <input id="manufacturer_name" name="name" type="text" maxlength="255" required
+                           placeholder="Ex : Texas Instruments, STMicroelectronics…">
+                    <div class="hint">Le nom doit être unique : les doublons sont refusés.</div>
+                </div>
+                <div class="field actions-end">
+                    <button class="btn" type="submit">Ajouter</button>
+                    <button class="btn btn-ghost" type="button" data-mfr-panel-cancel>Annuler</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="manufacturers-list">
+            {% include "_manufacturers_list.html" %}
+        </div>
+    </div>
+</section>
+
+<!-- Modale de renommage -->
+<div class="loc-overlay" id="mfr-rename-modal" hidden>
+    <div class="loc-modal">
+        <div class="loc-modal-head">
+            <h3 data-rename-title>Renommer le fabricant</h3>
+            <button class="loc-modal-close" type="button" data-rename-close>✕</button>
+        </div>
+        <form id="mfr-rename-form">
+            <div class="field">
+                <label for="mfr-rename-input">Nouveau nom</label>
+                <input id="mfr-rename-input" type="text" maxlength="255" required>
+                <div class="hint">Le nouveau nom est reporté sur les composants concernés.</div>
+            </div>
+            <div class="loc-modal-actions">
+                <button class="btn" type="submit">Enregistrer</button>
+                <button class="btn btn-ghost" type="button" data-rename-close>Annuler</button>
+            </div>
+            <div class="loc-modal-status" data-rename-status></div>
+        </form>
+    </div>
+</div>
+
+<!-- Modale de suppression -->
+<div class="loc-overlay" id="mfr-delete-modal" hidden>
+    <div class="loc-modal">
+        <div class="loc-modal-head">
+            <h3 data-delete-title>Supprimer le fabricant</h3>
+            <button class="loc-modal-close" type="button" data-delete-close>✕</button>
+        </div>
+        <p data-delete-text></p>
+        <div class="loc-modal-actions">
+            <button class="btn danger" type="button" data-delete-confirm>🗑️ Supprimer</button>
+            <button class="btn btn-ghost" type="button" data-delete-close>Annuler</button>
+        </div>
+        <div class="loc-modal-status" data-delete-status></div>
+    </div>
+</div>
+{% endblock %}

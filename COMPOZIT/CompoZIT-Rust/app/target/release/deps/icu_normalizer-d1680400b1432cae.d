@@ -1,0 +1,10 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\icu_normalizer-d1680400b1432cae.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\properties.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\provider.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\uts46.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libicu_normalizer-d1680400b1432cae.rlib: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\properties.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\provider.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\uts46.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\release\deps\libicu_normalizer-d1680400b1432cae.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\properties.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\provider.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\uts46.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\properties.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\provider.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\icu_normalizer-2.4.0\src\uts46.rs:

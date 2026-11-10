@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if flash %}
+<div class="alert {% if flash.kind == 'ok' %}ok{% else %}error{% endif %}">
+    <span>{% if flash.kind == 'ok' %}✅{% else %}⚠️{% endif %}</span>
+    <span>{{ flash.text }}</span>
+</div>
+{% endif %}
+
+<section class="card">
+    <div class="card-head">
+        <h2>{{ component.name or 'Composant' }}{% if component.smd == 'Yes' and component.marking and component.marking|lower not in (component.name or '')|lower %} - <span class="badge-smd">{{ component.marking }}</span>{% endif %}</h2>
+        <span class="spacer"></span>
+        <a class="btn btn-ghost btn-sm" href="/components">← Retour à la liste</a>
+        <form method="post" action="/components/{{ component.id }}/enrich"
+              data-confirm="Rechercher les caractéristiques manquantes de ce composant, sans écraser les valeurs existantes ?">
+            <button class="btn btn-sm" type="submit">🔎 Rechercher les caractéristiques</button>
+        </form>
+        <a class="btn btn-sm" href="/components/{{ component.id }}/edit">✏️ Modifier</a>
+    </div>
+
+    <div class="card-body">
+        <div class="sheet-layout">
+            <aside class="sheet-media">
+                {% if component.image_src %}
+                <button class="thumb-btn sheet-image" type="button"
+                        data-image="{{ component.image_src }}"
+                        data-image-title="{{ component.name or 'Composant' }}" title="Agrandir l'image">
+                    <img src="{{ component.image_src }}" alt="{{ component.name or '' }}">
+                </button>
+                {% else %}
+                <div class="sheet-image sheet-image-empty">
+                    <span>📷</span>
+                    <small>Aucune image</small>
+                </div>
+                {% endif %}
+            </aside>
+
+            <div class="sheet-info">
+                <div class="info-row">
+                    <span class="info-label">🆔 ID composant</span>
+                    <span class="info-value mono">#{{ component.id }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">📦 Catégorie</span>
+                    <span class="info-value">{{ component.category_name or 'Non définie' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">📂 Sous-catégorie</span>
+                    <span class="info-value">{{ component.subcategory_name or 'Non définie' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🏭 Fabricant</span>
+                    <span class="info-value">{{ component.manufacturer or 'Non spécifié' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">📦 Package</span>
+                    <span class="info-value">{{ component.package or 'Non spécifié' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🏪 Fournisseur</span>
+                    <span class="info-value">{{ component.supplier_name or 'Non spécifié' }}</span>
+                </div>
+                {% if component.supplier_reference %}
+                <div class="info-row">
+                    <span class="info-label">🔖 Référence fournisseur</span>
+                    <span class="info-value">{{ component.supplier_reference }}</span>
+                </div>
+                {% endif %}
+                <div class="info-row">
+                    <span class="info-label">🔧 Type SMD</span>
+                    <span class="info-value">
+                        {% if component.smd == 'Yes' %}<span class="badge-smd">OUI</span>{% else %}<span class="muted">NON</span>{% endif %}
+                    </span>
+                </div>
+                {% if component.marking %}
+                <div class="info-row">
+                    <span class="info-label">🔡 Code boîtier (CMS)</span>
+                    <span class="info-value"><span class="badge-smd">{{ component.marking }}</span></span>
+                </div>
+                {% endif %}
+                <div class="info-row">
+                    <span class="info-label">📍 Emplacement</span>
+                    <span class="info-value">{{ component.location_label or 'Non défini' }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">📊 Quantité</span>
+                    <div class="qty" data-component-id="{{ component.id }}">
+                        <button class="qty-btn" type="button" data-change="-1"
+                                {% if not component.quantity or component.quantity <= 0 %}disabled{% endif %}
+                                title="Retirer une unité">−</button>
+                        <span class="qty-value {% if component.quantity and component.quantity > 0 %}is-ok{% else %}is-zero{% endif %}">{{ component.quantity if component.quantity is not none else 0 }}</span>
+                        <button class="qty-btn" type="button" data-change="1" title="Ajouter une unité">+</button>
+                    </div>
+                </div>
+                {% if component.pins %}
+                <div class="info-row">
+                    <span class="info-label">📌 Nombre de pins</span>
+                    <span class="info-value">{{ component.pins }}</span>
+                </div>
+                {% endif %}
+                {% if component.datasheet or component.datasheet_file %}
+                <div class="info-row">
+                    <span class="info-label">📄 Datasheet</span>
+                    <span class="info-value">
+                        <a class="btn btn-ghost btn-sm" href="{{ component.datasheet or ('/' + component.datasheet_file) }}" target="_blank" rel="noreferrer">Ouvrir la datasheet</a>
+                    </span>
+                </div>
+                {% endif %}
+                {% if component.comment %}
+                <div class="info-row">
+                    <span class="info-label">💬 Commentaires</span>
+                    <span class="info-value multiline">{{ component.comment }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if params %}
+        <div class="sheet-params">
+            <h3>Paramètres techniques</h3>
+            <p class="small muted">Valeurs utilisées pour décrire précisément le composant et alimenter la recherche d'équivalents.</p>
+            <div class="params-grid">
+                {% for item in params %}
+                <div class="param-box">
+                    <div class="param-box-label">{{ item.label }}</div>
+                    <div class="param-box-value">{{ item.value }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="sheet-delete">
+            {% if component.quantity and component.quantity > 0 %}
+            <button class="btn danger" type="button" disabled
+                    title="Impossible de supprimer : quantité non nulle ({{ component.quantity }} unités)">🗑️ Supprimer le composant</button>
+            <p class="small muted">⚠️ Pour supprimer ce composant, la quantité doit être à 0.</p>
+            {% else %}
+            <form method="post" action="/components/{{ component.id }}/delete"
+                  data-confirm="Êtes-vous sûr de vouloir supprimer ce composant ?">
+                <button class="btn danger" type="submit">🗑️ Supprimer le composant</button>
+            </form>
+            {% endif %}
+        </div>
+
+        <div class="sheet-system small muted">
+            <strong>ℹ️ Informations système</strong><br>
+            Fiche consultée le {{ component.viewed_at }}<br>
+            Utilisateur connecté : {{ user_email }}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,11 @@
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\debug\deps\sha1-ad98b8248f811c6d.d: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\block_api.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\consts.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\../README.md C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress\soft.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress\x86_sha.rs
+
+C:\Users\skyne\Desktop\TRAE\CompoZIT-Portable-Site\app\target\debug\deps\libsha1-ad98b8248f811c6d.rmeta: C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\lib.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\block_api.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\consts.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\../README.md C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress\soft.rs C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress\x86_sha.rs
+
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\lib.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\block_api.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\consts.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\../README.md:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress\soft.rs:
+C:\Users\skyne\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\sha1-0.11.0\src\compress\x86_sha.rs:

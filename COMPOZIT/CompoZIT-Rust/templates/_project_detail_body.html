@@ -1,0 +1,380 @@
+<div class="detail-pane" data-pane="overview">
+    <div class="stats overview-stats">
+        <div class="stat">
+            <div class="stat-label">Composants prélevés</div>
+            <div class="stat-value"><span data-stat="picked">{{ detail.stats.total_used }}/{{ detail.stats.total_needed }}</span><small><span data-stat="components">{{ detail.stats.components }}</span> réf.</small></div>
+            <div class="small muted"><span data-stat="components_progress">{{ detail.stats.components_progress }}</span> % installé</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Travaux &amp; matériaux</div>
+            <div class="stat-value"><span data-stat="items">{{ detail.stats.items }}</span><small>ligne(s)</small></div>
+            <div class="small muted"><span data-stat="items_done">{{ detail.stats.items_completed }}/{{ detail.stats.items_quantity }}</span> · <span data-stat="items_progress">{{ detail.stats.items_progress }}</span> %</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Temps passé</div>
+            <div class="stat-value"><span data-stat="hours">{{ detail.stats.hours }}</span></div>
+            <div class="small muted">sur <span data-stat="hours_total">{{ detail.stats.hours_total }}</span> estimées</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Coût total</div>
+            <div class="stat-value"><span data-stat="total_cost">{{ detail.stats.total_cost }}</span></div>
+            <div class="small muted">Composants <span data-stat="components_cost">{{ detail.stats.components_cost }}</span> · Travaux <span data-stat="items_cost">{{ detail.stats.items_cost }}</span></div>
+        </div>
+    </div>
+
+    <div class="detail-overview">
+        <div class="detail-cover">
+            {% if detail.project.has_image %}
+            <img src="{{ detail.project.image_path }}" alt="{{ detail.project.name }}">
+            {% else %}
+            <div class="detail-cover-empty">
+                <span>◫</span>
+                <small>Aucune image de couverture</small>
+            </div>
+            {% endif %}
+            <form id="prj-image-form" enctype="multipart/form-data">
+                <input type="file" id="prj_image" name="project_image" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+                <div class="detail-cover-actions">
+                    <button class="btn btn-sm" type="button" data-image-pick>🖼️ Choisir une image</button>
+                    <button class="btn btn-sm btn-ghost" type="submit">Envoyer</button>
+                </div>
+                <div class="hint" data-image-name>Aucun fichier sélectionné (10 Mo max).</div>
+            </form>
+        </div>
+
+        <div class="detail-summary">
+            <div class="progress-block">
+                <div class="progress-head">
+                    <strong>Avancement global</strong>
+                    <span data-stat="progress">{{ detail.stats.progress }} %</span>
+                </div>
+                <div class="progress"><span style="width: {{ detail.stats.progress }}%" data-progress-bar></span></div>
+                <div class="progress-split">
+                    <span>Composants : <span data-stat="components_progress">{{ detail.stats.components_progress }}</span> %</span>
+                    <span>Travaux : <span data-stat="items_progress">{{ detail.stats.items_progress }}</span> %</span>
+                </div>
+            </div>
+
+            <dl class="detail-facts">
+                <div>
+                    <dt>Statut</dt>
+                    <dd><span class="status-pill {{ detail.project.status_key }}" data-detail-status>{{ detail.project.status }}</span></dd>
+                </div>
+                <div>
+                    <dt>Créé le</dt>
+                    <dd>{{ detail.project.created }}</dd>
+                </div>
+                <div>
+                    <dt>Mis à jour</dt>
+                    <dd>{{ detail.project.updated }}</dd>
+                </div>
+                <div>
+                    <dt>Documents</dt>
+                    <dd><span data-stat="files">{{ detail.stats.files }}</span> fichier(s)</dd>
+                </div>
+            </dl>
+
+            {% if detail.project.description %}
+            <div class="detail-description">{{ detail.project.description }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="overview-boards">
+        <section class="board">
+            <header class="board-head">
+                <strong>Composants installés</strong>
+                <button class="btn btn-sm btn-ghost" type="button" data-tab="components">Tout voir</button>
+            </header>
+            {% if detail.components %}
+            <ul class="board-list">
+                {% for c in detail.components %}{% if loop.index <= 8 %}
+                <li data-pc-row="{{ c.pc_id }}">
+                    <div class="board-name">
+                        <span>{{ c.name }}</span>
+                        <small class="muted" title="Prélevé / demandé"><span data-pc-count>{{ c.used }} / {{ c.needed }}</span>{% if c.manufacturer %} · {{ c.manufacturer }}{% endif %}</small>
+                    </div>
+                    <div class="pstep" data-pc="{{ c.pc_id }}" data-field="used">
+                        <button class="pstep-btn" type="button" data-change="-1"{% if c.used <= 0 %} disabled{% endif %}>−</button>
+                        <span class="pstep-value" data-pc-value>{{ c.used }}</span>
+                        <button class="pstep-btn" type="button" data-change="1"{% if c.used >= c.needed %} disabled{% endif %}>+</button>
+                    </div>
+                    <div class="progress sm"><span style="width: {{ c.progress }}%" data-pc-bar></span></div>
+                </li>
+                {% endif %}{% endfor %}
+                {% if detail.components|length > 8 %}
+                <li><div class="small muted">… et {{ detail.components|length - 8 }} autre(s)</div></li>
+                {% endif %}
+            </ul>
+            {% else %}
+            <p class="board-empty">Aucun composant lié à ce projet.</p>
+            {% endif %}
+        </section>
+
+        <section class="board">
+            <header class="board-head">
+                <strong>Travaux &amp; matériaux</strong>
+                <button class="btn btn-sm btn-ghost" type="button" data-tab="items">Tout voir</button>
+            </header>
+            {% if detail.items %}
+            <ul class="board-list">
+                {% for item in detail.items %}{% if loop.index <= 8 %}
+                <li data-item-row="{{ item.id }}">
+                    <div class="board-name">
+                        <span>{{ item.name }}</span>
+                        <small class="muted" data-item-count>{{ item.completed_label }} / {{ item.quantity_label }} {{ item.unit }}</small>
+                    </div>
+                    <div class="actions">
+                        <button class="pstep-btn" type="button" title="Reculer"
+                                data-item-step="{{ item.id }}" data-item-change="-1"{% if not item.can_minus %} disabled{% endif %}>−</button>
+                        <button class="pstep-btn" type="button" title="Avancer"
+                                data-item-step="{{ item.id }}" data-item-change="1"{% if not item.can_plus %} disabled{% endif %}>+</button>
+                    </div>
+                    <div class="progress sm"><span style="width: {{ item.progress }}%" data-item-bar></span></div>
+                </li>
+                {% endif %}{% endfor %}
+                {% if detail.items|length > 8 %}
+                <li><div class="small muted">… et {{ detail.items|length - 8 }} autre(s)</div></li>
+                {% endif %}
+            </ul>
+            {% else %}
+            <p class="board-empty">Aucun travail ni matériau pour ce projet.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+<div class="detail-pane" data-pane="components" hidden>
+    <form class="toolbar" id="prj-component-form">
+        <div class="field autocomplete-field">
+            <label for="prj_component_search">Ajouter un composant</label>
+            <p class="hint">Choisissez une référence déjà présente dans votre stock global.</p>
+            <input class="input" id="prj_component_search" type="text" autocomplete="off"
+                   placeholder="Tapez la référence ou le nom du composant…">
+            <input type="hidden" id="prj_component_id" name="component_id">
+            <div class="autocomplete-suggestions" id="prj_component_suggestions"></div>
+        </div>
+        <div class="field narrow">
+            <label for="prj_component_qty">Quantité nécessaire</label>
+            <input class="input" id="prj_component_qty" name="quantity_needed" type="number" min="1" value="1">
+        </div>
+        <div class="field actions">
+            <button class="btn" type="submit">Ajouter</button>
+        </div>
+    </form>
+
+    {% if detail.components %}
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Fabricant</th>
+                    <th class="numeric">Stock</th>
+                    <th class="numeric">Nécessaire</th>
+                    <th class="numeric">Prélevé</th>
+                    <th>Avancement</th>
+                    <th class="actions-head">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in detail.components %}
+                <tr data-pc-row="{{ c.pc_id }}">
+                    <td class="cell-name">
+                        {{ c.name }}
+                        {% if c.package %}<span class="muted"> · {{ c.package }}</span>{% endif %}
+                    </td>
+                    <td>{{ c.manufacturer }}</td>
+                    <td class="numeric">{{ c.stock }}</td>
+                    <td class="numeric">
+                        <div class="pstep" data-pc="{{ c.pc_id }}" data-field="needed">
+                            <button class="pstep-btn" type="button" data-change="-1"{% if c.needed <= 0 %} disabled{% endif %}>−</button>
+                            <span class="pstep-value" data-pc-value>{{ c.needed }}</span>
+                            <button class="pstep-btn" type="button" data-change="1">+</button>
+                        </div>
+                    </td>
+                    <td class="numeric">
+                        <div class="pstep" data-pc="{{ c.pc_id }}" data-field="used">
+                            <button class="pstep-btn" type="button" data-change="-1"{% if c.used <= 0 %} disabled{% endif %}>−</button>
+                            <span class="pstep-value" data-pc-value>{{ c.used }}</span>
+                            <button class="pstep-btn" type="button" data-change="1"{% if c.used >= c.needed %} disabled{% endif %}>+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="progress sm"><span style="width: {{ c.progress }}%" data-pc-bar></span></div>
+                        <div class="muted small" data-pc-percent>{{ c.progress }} %</div>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <a class="btn btn-sm btn-ghost" href="/components/{{ c.component_id }}/edit"
+                               title="Ouvrir la fiche du composant">👁️</a>
+                            <button class="btn btn-sm danger" type="button" title="Retirer du projet"
+                                    data-pc-delete="{{ c.pc_id }}" data-pc-label="{{ c.name }}">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty">
+        <span class="empty-icon">📦</span>
+        <strong>Aucun composant lié</strong>
+        <p>Ajoutez les références nécessaires à ce projet pour suivre les quantités prélevées.</p>
+    </div>
+    {% endif %}
+</div>
+
+<div class="detail-pane" data-pane="items" hidden>
+    <form class="toolbar" id="prj-item-form">
+        <div class="field narrow">
+            <label for="item_kind">Type</label>
+            <select id="item_kind" name="kind">
+                {% for type in detail.item_types %}
+                <option value="{{ type.value }}">{{ type.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field">
+            <label for="item_name">Libellé</label>
+            <input class="input" id="item_name" name="name" type="text" maxlength="255" required
+                   placeholder="Ex : Soudure CMS, Plaque support…">
+        </div>
+        <div class="field narrow">
+            <label for="item_quantity">Quantité</label>
+            <input class="input" id="item_quantity" name="quantity" type="number" step="0.5" min="0" value="1">
+        </div>
+        <div class="field narrow">
+            <label for="item_unit">Unité</label>
+            <input class="input" id="item_unit" name="unit" type="text" maxlength="50" value="unité">
+        </div>
+        <div class="field narrow">
+            <label for="item_unit_price">Prix unitaire</label>
+            <input class="input" id="item_unit_price" name="unit_price" type="number" step="0.01" min="0" value="0">
+        </div>
+        <div class="field span-2">
+            <label for="item_description">Note</label>
+            <input class="input" id="item_description" name="description" type="text" maxlength="2000">
+        </div>
+        <div class="field actions">
+            <button class="btn" type="submit">Ajouter</button>
+        </div>
+    </form>
+
+    {% if detail.items %}
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Libellé</th>
+                    <th class="numeric">Avancement</th>
+                    <th class="numeric">Prix unitaire</th>
+                    <th class="numeric">Total</th>
+                    <th>État</th>
+                    <th class="actions-head">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in detail.items %}
+                <tr data-item-row="{{ item.id }}"
+                    data-item-kind="{{ item.kind }}"
+                    data-item-name="{{ item.name }}"
+                    data-item-description="{{ item.description }}"
+                    data-item-quantity="{{ item.quantity_input }}"
+                    data-item-unit="{{ item.unit }}"
+                    data-item-unit-price="{{ item.unit_price_input }}">
+                    <td><span class="badge info">{{ item.kind_label }}</span></td>
+                    <td class="cell-name">
+                        {{ item.name }}
+                        {% if item.description %}<div class="muted small">{{ item.description }}</div>{% endif %}
+                    </td>
+                    <td class="numeric" data-item-count>{{ item.completed_label }} / {{ item.quantity_label }} {{ item.unit }}</td>
+                    <td class="numeric">{{ item.unit_price_label }}</td>
+                    <td class="numeric">{{ item.total_price_label }}</td>
+                    <td>
+                        <div class="progress sm"><span style="width: {{ item.progress }}%" data-item-bar></span></div>
+                        <div class="muted small" data-item-percent>{{ item.status }} · {{ item.progress }} %</div>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <button class="pstep-btn" type="button" title="Reculer"
+                                    data-item-step="{{ item.id }}" data-item-change="-1"{% if not item.can_minus %} disabled{% endif %}>−</button>
+                            <button class="pstep-btn" type="button" title="Avancer"
+                                    data-item-step="{{ item.id }}" data-item-change="1"{% if not item.can_plus %} disabled{% endif %}>+</button>
+                            <button class="btn btn-sm btn-ghost" type="button" title="Modifier"
+                                    data-item-edit="{{ item.id }}">✏️</button>
+                            <button class="btn btn-sm danger" type="button" title="Supprimer"
+                                    data-item-delete="{{ item.id }}" data-item-label="{{ item.name }}">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty">
+        <span class="empty-icon">🛠️</span>
+        <strong>Aucun travail ni matériau</strong>
+        <p>Décrivez les tâches et les fournitures du projet pour suivre leur avancement et leur coût.</p>
+    </div>
+    {% endif %}
+</div>
+
+<div class="detail-pane" data-pane="files" hidden>
+    <form class="toolbar" id="prj-file-form" enctype="multipart/form-data">
+        <div class="field">
+            <label for="prj_file">Fichier à déposer</label>
+            <input class="input" id="prj_file" name="file" type="file" required>
+            <div class="hint">Schémas, photos, programmes, datasheets… (50 Mo maximum).</div>
+        </div>
+        <div class="field narrow">
+            <label for="prj_file_category">Catégorie</label>
+            <select id="prj_file_category" name="file_category">
+                {% for category in detail.file_categories %}
+                <option value="{{ category.value }}">{{ category.icon }} {{ category.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field">
+            <label for="prj_file_name">Nom affiché</label>
+            <input class="input" id="prj_file_name" name="display_name" type="text" maxlength="255"
+                   placeholder="Laissez vide pour reprendre le nom du fichier">
+        </div>
+        <div class="field">
+            <label for="prj_file_note">Description</label>
+            <input class="input" id="prj_file_note" name="description" type="text" maxlength="2000">
+        </div>
+        <div class="field actions">
+            <button class="btn" type="submit">Téléverser</button>
+        </div>
+    </form>
+
+    {% if detail.files %}
+    <div class="file-grid">
+        {% for file in detail.files %}
+        <article class="file-card" data-file-row="{{ file.id }}">
+            <div class="file-icon">{{ file.icon }}</div>
+            <div class="file-meta">
+                <a class="file-name" href="{{ file.path }}" target="_blank" rel="noopener">{{ file.display_name }}</a>
+                <div class="muted small">{{ file.original_name }} · {{ file.size_label }} · {{ file.uploaded }}</div>
+                {% if file.description %}<div class="muted small">{{ file.description }}</div>{% endif %}
+            </div>
+            <div class="actions">
+                <a class="btn btn-sm btn-ghost" href="{{ file.path }}" download title="Télécharger">⬇️</a>
+                <button class="btn btn-sm danger" type="button" title="Supprimer"
+                        data-file-delete="{{ file.id }}" data-file-label="{{ file.display_name }}">🗑️</button>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">
+        <span class="empty-icon">📎</span>
+        <strong>Aucun document</strong>
+        <p>Déposez les schémas, photos de montage, programmes et fiches techniques du projet.</p>
+    </div>
+    {% endif %}
+</div>

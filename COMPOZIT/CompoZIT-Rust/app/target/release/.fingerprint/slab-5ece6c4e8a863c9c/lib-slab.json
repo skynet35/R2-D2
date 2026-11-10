@@ -1,0 +1,1 @@
+{"rustc":222933465615791797,"features":"[\"std\"]","declared_features":"[\"default\", \"serde\", \"std\"]","target":7798044754532116308,"profile":8131754891754231965,"path":7426561503544486529,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release\\.fingerprint\\slab-5ece6c4e8a863c9c\\dep-lib-slab","checksum":false}}],"rustflags":[],"config":9396254390672932401,"compile_kind":0}

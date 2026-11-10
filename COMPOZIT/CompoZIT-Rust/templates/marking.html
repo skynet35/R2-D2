@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if not ready %}
+<div class="alert error">
+    <span>⚠️</span>
+    <span>
+        La base de marquage n'est pas installée sur cette base de données.
+        Importez le fichier <span class="mono">base_de_donnees/marking_codes.sql</span>
+        dans la base courante, puis rechargez cette page.
+    </span>
+</div>
+{% endif %}
+
+<section class="card">
+    <div class="card-head">
+        <h2>Identifier un composant</h2>
+        {% if ready %}
+        <span class="badge">{{ total }} correspondances indexées</span>
+        {% endif %}
+        <span class="spacer"></span>
+        <span class="hint">Les codes usuels font 2 à 4 caractères (ex. <span class="mono">65V</span>, <span class="mono">J1</span>, <span class="mono">2A</span>).</span>
+    </div>
+
+    <div class="card-body">
+        <div class="toolbar">
+            <div class="field">
+                <label for="marking_query">Code de marquage</label>
+                <input type="search" id="marking_query" name="search" autocomplete="off" spellcheck="false"
+                       placeholder="Code imprimé sur le boîtier, ou référence fabricant">
+            </div>
+            <div class="field narrow">
+                <label for="marking_limit">Résultats</label>
+                <select id="marking_limit">
+                    <option value="50">50</option>
+                    <option value="100" selected>100</option>
+                    <option value="200">200</option>
+                </select>
+            </div>
+            <div class="field actions">
+                <button class="btn" type="button" id="marking_search_btn">Rechercher</button>
+                <button class="btn btn-ghost" type="button" id="marking_reset_btn">Réinitialiser</button>
+            </div>
+        </div>
+        <div class="hint" id="marking_status">
+            {% if ready %}Saisissez un code : la recherche démarre dès le premier caractère.
+            {% else %}Importez d'abord la base de marquage.{% endif %}
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table class="data-table" id="marking_table">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Référence</th>
+                <th>Fabricant</th>
+                <th>Boîtier</th>
+                <th>Fonction</th>
+                <th class="actions-head">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="marking_results">
+            <tr>
+                <td colspan="6">
+                    <div class="empty">
+                        <span class="empty-icon">🔎</span>
+                        Saisissez le code lu sur le composant pour retrouver sa référence.
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" type="button" title="Fermer">✕</button>
+    <figure>
+        <img src="" alt="" id="lightbox-image">
+        <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+</div>
+{% endblock %}

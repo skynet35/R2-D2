@@ -1,0 +1,22 @@
+<svg width="100" height="80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Package body -->
+  <rect x="15" y="10" width="70" height="50" fill="#2c3e50" stroke="#34495e" stroke-width="2" rx="3"/>
+  
+  <!-- Heat sink tab -->
+  <rect x="35" y="5" width="30" height="10" fill="#95a5a6" stroke="#7f8c8d" stroke-width="1"/>
+  <circle cx="50" cy="10" r="2" fill="#34495e"/>
+  
+  <!-- Package label -->
+  <text x="50" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8" font-weight="bold">TO-220</text>
+  <text x="50" y="35" text-anchor="middle" fill="#bdc3c7" font-family="Arial, sans-serif" font-size="6">3-PIN</text>
+  
+  <!-- Pins -->
+  <rect x="25" y="60" width="4" height="15" fill="#95a5a6"/>
+  <rect x="48" y="60" width="4" height="15" fill="#95a5a6"/>
+  <rect x="71" y="60" width="4" height="15" fill="#95a5a6"/>
+  
+  <!-- Pin numbers -->
+  <text x="27" y="78" text-anchor="middle" fill="#7f8c8d" font-family="Arial, sans-serif" font-size="5">1</text>
+  <text x="50" y="78" text-anchor="middle" fill="#7f8c8d" font-family="Arial, sans-serif" font-size="5">2</text>
+  <text x="73" y="78" text-anchor="middle" fill="#7f8c8d" font-family="Arial, sans-serif" font-size="5">3</text>
+</svg>

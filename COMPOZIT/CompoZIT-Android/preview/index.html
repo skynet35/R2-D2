@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CompoZ'IT — Aperçu de l'application Android</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: #edeff5;
+    color: #1d1b20;
+    background-image: linear-gradient(#e2e5ee 1px, transparent 1px), linear-gradient(90deg, #e2e5ee 1px, transparent 1px);
+    background-size: 44px 44px;
+    padding-bottom: 60px;
+  }
+
+  /* ---------- entete de la planche ---------- */
+  .sheet-head { max-width: 1180px; margin: 0 auto; padding: 44px 30px 10px; }
+  .sheet-head h1 { font-size: 27px; font-weight: 700; letter-spacing: -.2px; margin: 0 0 6px; }
+  .sheet-head h1 span { color: #667eea; }
+  .sheet-head p { margin: 0; font-size: 14px; line-height: 1.55; color: #4a4c57; max-width: 760px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-size: 11.5px; font-weight: 600; letter-spacing: .3px; text-transform: uppercase;
+    background: #fff; border: 1px solid #d7dae5; color: #4a4c57;
+    padding: 5px 11px; border-radius: 999px;
+  }
+  .chip.hi { background: linear-gradient(135deg, #667eea, #764ba2); border-color: transparent; color: #fff; }
+  .palette { display: flex; gap: 0; margin-top: 18px; border-radius: 8px; overflow: hidden; width: 300px; height: 26px; box-shadow: 0 1px 4px rgba(20,22,40,.15); }
+  .palette i { flex: 1; }
+
+  /* ---------- rail des ecrans ---------- */
+  .rail { display: flex; flex-wrap: wrap; gap: 40px 34px; justify-content: center; padding: 40px 30px 0; }
+  figure { margin: 0; }
+  figcaption { width: 390px; margin-top: 14px; }
+  figcaption b { display: block; font-size: 14px; font-weight: 700; }
+  figcaption span { display: block; font-size: 12.5px; color: #5a5d6a; line-height: 1.5; margin-top: 3px; }
+  .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%; background: #667eea; color: #fff;
+    font-size: 11px; font-weight: 700; margin-right: 7px; vertical-align: 1px;
+  }
+
+  /* ---------- chassis du telephone ---------- */
+  .phone {
+    width: 390px; height: 822px; flex: 0 0 auto;
+    background: #0d0e13; border-radius: 46px; padding: 10px;
+    box-shadow: 0 20px 44px rgba(16, 18, 32, .30), 0 2px 0 rgba(255,255,255,.5) inset;
+  }
+  .screen {
+    width: 100%; height: 100%; border-radius: 37px; overflow: hidden;
+    background: var(--background); color: var(--on-surface);
+    display: flex; flex-direction: column; position: relative;
+  }
+  .screen > .scroll { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+  /* jeu de couleurs clair (lightColorScheme du theme) */
+  .light {
+    --primary: #667eea; --primary-hi: #5a71e0; --secondary: #764ba2;
+    --background: #f7f8fc; --surface: #ffffff; --card: #f7f2fa;
+    --on-surface: #1d1b20; --on-surface-variant: #4a4c57;
+    --surface-variant: #f1f2f8; --outline: #c7c9d6; --error: #b3261e;
+  }
+  /* jeu de couleurs sombre (darkColorScheme du theme) */
+  .dark {
+    --primary: #9aa6f5; --primary-hi: #8e9bf3; --secondary: #c6a9f0;
+    --background: #101114; --surface: #17181c; --card: #1d1b20;
+    --on-surface: #e6e1e5; --on-surface-variant: #c6c7d0;
+    --surface-variant: #26282f; --outline: #454852; --error: #f2b8b5;
+  }
+
+  .statusbar {
+    height: 30px; flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 22px; background: var(--background); color: var(--on-surface);
+    font-size: 11.5px; font-weight: 600; letter-spacing: .2px;
+  }
+  .statusbar .signals { display: flex; gap: 6px; align-items: center; opacity: .82; font-size: 10px; letter-spacing: 1px; }
+
+  /* ---------- barre d'application ---------- */
+  .topbar {
+    height: 64px; flex: 0 0 auto; display: flex; align-items: center; gap: 4px;
+    padding: 0 4px; background: var(--surface);
+  }
+  .topbar h1 { font-size: 19px; font-weight: 500; margin: 0; flex: 1; letter-spacing: .1px; }
+  .topbar .two { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+  .topbar .two h1 { font-size: 19px; }
+  .topbar .two small { font-size: 11px; color: var(--on-surface-variant); font-weight: 500; }
+  .icon-btn {
+    width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: var(--on-surface-variant);
+  }
+  .actions { display: flex; align-items: center; }
+
+  /* ---------- corps ---------- */
+  .body { background: var(--background); flex: 1; display: flex; flex-direction: column; }
+  .pad { padding: 20px; }
+  .stack > * + * { margin-top: 14px; }
+  .row { display: flex; align-items: center; }
+
+  .txt-md { font-size: 14px; line-height: 1.5; }
+  .muted { color: var(--on-surface-variant); }
+  .txt-sm { font-size: 12px; line-height: 1.45; color: var(--on-surface-variant); }
+
+  /* ---------- champ de saisie (OutlinedTextField) ---------- */
+  .field { position: relative; }
+  .field .label {
+    position: absolute; top: -8px; left: 11px; z-index: 2; padding: 0 4px;
+    background: var(--background); font-size: 12px; color: var(--on-surface-variant);
+  }
+  .oncard .field .label { background: var(--card); }
+  .field .input {
+    min-height: 56px; border: 1px solid var(--outline); border-radius: 4px;
+    display: flex; align-items: center; padding: 0 16px; font-size: 16px; color: var(--on-surface);
+    background: transparent;
+  }
+  .field .input.focus { border-color: var(--primary); border-width: 2px; }
+  .field .input .ph { color: var(--on-surface-variant); opacity: .85; }
+  .field .support { font-size: 11.5px; color: var(--on-surface-variant); padding: 4px 16px 0; line-height: 1.4; }
+  .field.inline { flex: 1; }
+  .trail { font-size: 12px; font-weight: 600; color: var(--primary); letter-spacing: .4px; margin-left: auto; padding-left: 10px; }
+
+  /* ---------- boutons ---------- */
+  .btn {
+    height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+    background: var(--primary); color: #fff; font-size: 14px; font-weight: 500; letter-spacing: .1px;
+    padding: 0 22px; border: none;
+  }
+  .btn.wide { width: 100%; }
+  .btn.outline { background: transparent; border: 1px solid var(--outline); color: var(--primary); }
+  .btn.text { background: transparent; color: var(--primary); padding: 0 12px; }
+  .btn.off { opacity: .38; }
+  .btnrow { display: flex; gap: 12px; }
+  .btnrow .btn { flex: 1; }
+
+  /* ---------- case a cocher ---------- */
+  .check { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .check .box {
+    width: 18px; height: 18px; border-radius: 2px; flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .check .box.on { background: var(--primary); color: #fff; }
+  .check .box.off { border: 2px solid var(--on-surface-variant); }
+
+  /* ---------- bandeau degrade ---------- */
+  .gradient {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 0 0 20px 20px; padding: 24px 22px; color: #fff;
+  }
+  .gradient h2 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: .2px; }
+  .gradient p { margin: 2px 0 0; font-size: 13.5px; color: rgba(255,255,255,.85); }
+
+  /* ---------- recherche ---------- */
+  .search { position: relative; margin: 8px 14px 0; }
+  .search .lens { position: absolute; left: 13px; top: 16px; color: var(--on-surface-variant); }
+  .search .field .input { padding-left: 48px; padding-right: 46px; }
+  .search .clear { position: absolute; right: 8px; top: 8px; color: var(--on-surface-variant); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+
+  .countbar { display: flex; justify-content: space-between; padding: 3px 16px 6px; font-size: 11px; color: var(--on-surface-variant); }
+  .countbar .live { color: var(--primary); font-weight: 600; }
+
+  /* ---------- liste des composants ---------- */
+  .list { flex: 1; overflow: hidden; }
+  .item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; }
+  .thumb {
+    width: 46px; height: 46px; flex: 0 0 auto; border-radius: 8px; background: var(--surface-variant);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: var(--on-surface-variant);
+  }
+  .item .main { flex: 1; min-width: 0; }
+  .item .name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .item .sub { font-size: 12px; color: var(--on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .item .loc { font-size: 11px; font-weight: 600; color: var(--primary); }
+  .divider { height: 1px; background: var(--surface-variant); }
+
+  /* ---------- compteur de quantite ---------- */
+  .stepper { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+  .stepper .sign { color: var(--primary); display: flex; align-items: center; justify-content: center; }
+  .stepper .val { text-align: center; font-weight: 600; color: var(--on-surface); }
+  .stepper.compact .sign { width: 30px; height: 30px; font-size: 16px; }
+  .stepper.compact .val { width: 34px; font-size: 16px; }
+  .stepper.full .sign { width: 40px; height: 40px; font-size: 22px; }
+  .stepper.full .val { width: 52px; font-size: 24px; }
+  .stepper .val.zero { color: var(--error); }
+
+  /* ---------- cartes ---------- */
+  .card {
+    background: var(--card); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(20,22,40,.13), 0 1px 2px rgba(20,22,40,.08);
+  }
+  .card .inner { padding: 14px; }
+  .card .title { font-size: 16px; font-weight: 600; }
+  .card .subtitle { font-size: 12px; color: var(--on-surface-variant); }
+  .card .head { display: flex; align-items: center; justify-content: space-between; }
+  .card .split { border-top: 1px solid var(--surface-variant); }
+
+  .inforow { display: flex; padding: 5px 0; font-size: 14px; }
+  .inforow .k { width: 118px; flex: 0 0 auto; font-size: 12px; color: var(--on-surface-variant); padding-top: 1px; }
+  .inforow .v { flex: 1; }
+
+  .imageband {
+    height: 180px; flex: 0 0 auto; background: var(--surface-variant);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--on-surface-variant);
+  }
+
+  /* ---------- notes ---------- */
+  .notes {
+    max-width: 1180px; margin: 56px auto 0; padding: 22px 26px;
+    background: #fff; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0;
+    box-shadow: 0 2px 10px rgba(20,22,40,.07);
+  }
+  .notes h3 { margin: 0 0 12px; font-size: 14px; font-weight: 700; letter-spacing: .2px; }
+  .notes ul { margin: 0; padding-left: 20px; }
+  .notes li { font-size: 13px; line-height: 1.7; color: #3f424e; }
+  .notes code { background: #f1f2f8; border-radius: 3px; padding: 1px 5px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="sheet-head">
+  <h1>CompoZ'<span>IT</span> — aperçu de l'application Android</h1>
+  <p>
+    Reconstitution de l'interface à partir du code Compose réel du projet
+    <strong>CompoZIT-Android</strong> : mêmes libellés, même mise en page, mêmes couleurs.
+  </p>
+  <div class="meta">
+    <span class="chip hi">APK 1.0 compilé</span>
+    <span class="chip">fr.compozit.mobile</span>
+    <span class="chip">Jetpack Compose · Material 3</span>
+    <span class="chip">minSdk 26 · targetSdk 34</span>
+    <span class="chip">Périmètre : réglages · login · liste · fiche</span>
+  </div>
+  <div class="palette" title="Palette du thème">
+    <i style="background:#667eea"></i><i style="background:#764ba2"></i>
+    <i style="background:#f7f8fc"></i><i style="background:#1d1b20"></i>
+    <i style="background:#9aa6f5"></i><i style="background:#c6a9f0"></i>
+  </div>
+</div>
+
+<div class="rail">
+
+  <!-- ============ 1. REGLAGES DU SITE ============ -->
+  <figure>
+    <div class="phone">
+      <div class="screen light">
+        <div class="statusbar"><span>9:41</span><span class="signals">▮▮▮ ᯤ 87%</span></div>
+        <div class="topbar">
+          <span class="icon-btn">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          </span>
+          <h1>Réglages du site</h1>
+        </div>
+        <div class="scroll"><div class="body pad stack">
+          <div class="txt-md muted">Indiquez l'adresse du site CompoZ'IT. L'application s'y connecte en HTTPS : aucun identifiant de base de données n'est enregistré sur ce téléphone.</div>
+
+          <div class="field">
+            <div class="label">Adresse du site</div>
+            <div class="input focus">https://mr-j.fr/copozit</div>
+            <div class="support">Exemple : https://mr-j.fr/copozit</div>
+          </div>
+
+          <div class="btnrow">
+            <div class="btn outline">Tester</div>
+            <div class="btn">Enregistrer</div>
+          </div>
+
+          <div class="card">
+            <div class="inner">
+              <div class="title">Adresse appelée</div>
+              <div class="subtitle">https://mr-j.fr/copozit/mobile_api.php</div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <figcaption>
+      <b><span class="num">1</span>Réglages du site</b>
+      <span>Un seul champ. Les accès MySQL restent sur le serveur : le téléphone n'appelle qu'une API JSON en HTTPS, ce qui reste valable quelle que soit l'adresse IP attribuée en 4G/5G. <strong>Tester</strong> interroge l'API, <strong>Enregistrer</strong> conserve l'adresse localement.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ============ 2. IDENTIFICATION ============ -->
+  <figure>
+    <div class="phone">
+      <div class="screen light">
+        <div class="statusbar"><span>9:41</span><span class="signals">▮▮▮ ᯤ 87%</span></div>
+        <div class="scroll">
+          <div class="gradient">
+            <h2>CompoZ'IT</h2>
+            <p>Inventaire de composants électroniques</p>
+          </div>
+          <div class="body pad stack">
+            <div class="txt-md muted">Identifiez-vous pour accéder à votre inventaire.</div>
+
+            <div class="field"><div class="label">Adresse e-mail</div><div class="input">admin@compozit.fr</div></div>
+
+            <div class="field"><div class="label">Mot de passe</div><div class="input focus">••••••••••</div></div>
+
+            <div class="check">
+              <span class="box on">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </span>
+              <span>Rester connecté sur cet appareil</span>
+            </div>
+
+            <div class="btn wide">Se connecter</div>
+
+            <div style="margin-top:4px">
+              <div class="btn text" style="width:100%; justify-content:center; height:32px">Réglages du site</div>
+              <div class="txt-sm" style="padding-left:12px">Site : https://mr-j.fr/copozit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>
+      <b><span class="num">2</span>Identification</b>
+      <span>Mêmes comptes que le site : la vérification du mot de passe (empreintes bcrypt <code>$2y$</code>) se fait côté serveur, qui renvoie un jeton valable <strong>60 jours</strong> et repoussé à chaque appel. Le compte refusé est celui dont le champ <code>active</code> vaut 0.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ============ 3. INVENTAIRE + RECHERCHE ============ -->
+  <figure>
+    <div class="phone">
+      <div class="screen light">
+        <div class="statusbar"><span>9:41</span><span class="signals">▮▮▮ ᯤ 87%</span></div>
+        <div class="topbar">
+          <div class="two"><h1>CompoZ'IT</h1><small>admin@compozit.fr</small></div>
+          <div class="actions">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></span>
+            <span class="icon-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="search">
+            <span class="lens"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+            <div class="field"><div class="input focus">40</div></div>
+            <span class="clear"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>
+          </div>
+          <div class="countbar"><span>4 fiche(s) affichée(s)</span><span class="live">Recherche…</span></div>
+
+          <div class="list">
+            <div class="item"><div class="thumb">CD</div><div class="main"><div class="name">CD4040BE</div><div class="sub">Texas Instruments · DIP-16</div><div class="loc">A · 2 · C</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">34</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">CD</div><div class="main"><div class="name">CD4047BE</div><div class="sub">Texas Instruments · DIP-14</div><div class="loc">A · 2 · C</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">18</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">IR</div><div class="main"><div class="name">IRF540N</div><div class="sub">Infineon · TO-220</div><div class="loc">A · 3 · B</div></div><div class="stepper compact"><span class="sign">−</span><span class="val zero">0</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">LM</div><div class="main"><div class="name">LM4040AIZ-2.5</div><div class="sub">Texas Instruments · TO-92</div><div class="loc">B · 4 · A</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">12</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>
+      <b><span class="num">3</span>Recherche et inventaire</b>
+      <span>L'écran principal : la barre de recherche, puis la liste. Filtrage instantané sur référence, fabricant, boîtier, commentaire et réf. fournisseur. Le compteur <strong>− / +</strong> est sur chaque ligne : le stock s'ajuste sans ouvrir la fiche.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ============ 4. FICHE COMPOSANT ============ -->
+  <figure>
+    <div class="phone">
+      <div class="screen light">
+        <div class="statusbar"><span>9:41</span><span class="signals">▮▮▮ ᯤ 87%</span></div>
+        <div class="topbar">
+          <span class="icon-btn"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></span>
+          <h1>LM317T</h1>
+        </div>
+        <div class="body">
+          <div class="imageband">Aucune image pour ce composant</div>
+          <div class="pad stack oncard" style="padding-top:16px">
+            <div class="card" style="background:#E3E7FF">
+              <div class="inner" style="display:flex; align-items:center; gap:16px">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="#10194F"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+                <div>
+                  <div class="subtitle" style="color:#10194F">Emplacement</div>
+                  <div style="font-size:22px; font-weight:600; color:#10194F; line-height:1.2">A · 3 · B</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="inner head">
+                <div>
+                  <div class="title">Stock</div>
+                  <div class="subtitle">Quantité en inventaire</div>
+                </div>
+                <div class="stepper full"><span class="sign">−</span><span class="val">12</span><span class="sign">+</span></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="inner" style="display:flex; flex-direction:column; gap:8px">
+                <div class="title">Fiche technique</div>
+                <div class="btn wide">Ouvrir le datasheet</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="inner">
+                <div class="title" style="margin-bottom:4px">Informations</div>
+                <div class="inforow"><div class="k">Référence</div><div class="v">LM317T</div></div>
+                <div class="inforow"><div class="k">Fabricant</div><div class="v">STMicroelectronics</div></div>
+                <div class="inforow"><div class="k">Boîtier</div><div class="v">TO-220</div></div>
+                <div class="inforow"><div class="k">Broches</div><div class="v">3</div></div>
+                <div class="inforow"><div class="k">Catégorie</div><div class="v">Semi-conducteurs / Régulateurs</div></div>
+                <div class="inforow"><div class="k">Réf. fournisseur</div><div class="v">LM317T-ST</div></div>
+                <div class="inforow"><div class="k">Prix</div><div class="v">1.20 €</div></div>
+                <div class="inforow"><div class="k">Commentaire</div><div class="v">Régulateur ajustable 1,25–37 V</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>
+      <b><span class="num">4</span>Fiche du composant</b>
+      <span>L'emplacement (casier · tiroir · compartiment) est mis en avant juste sous l'image : c'est ce qu'on cherche en premier devant l'étagère. Suivent le stock ajustable par le compteur −/+, le datasheet — lien externe ou PDF du site, avec repli vers le presse-papier — et les informations. Le reste du formulaire bureau n'est pas repris.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ============ 5. THEME SOMBRE ============ -->
+  <figure>
+    <div class="phone">
+      <div class="screen dark">
+        <div class="statusbar"><span>9:41</span><span class="signals">▮▮▮ ᯤ 87%</span></div>
+        <div class="topbar">
+          <div class="two"><h1>CompoZ'IT</h1><small>admin@compozit.fr</small></div>
+          <div class="actions">
+            <span class="icon-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></span>
+            <span class="icon-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="search">
+            <span class="lens"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+            <div class="field"><div class="input"><span class="ph">Référence, fabricant, boîtier, commentaire…</span></div></div>
+          </div>
+          <div class="countbar"><span>248 fiche(s) affichée(s)</span></div>
+
+          <div class="list">
+            <div class="item"><div class="thumb">LM</div><div class="main"><div class="name">LM317T</div><div class="sub">STMicroelectronics · TO-220</div><div class="loc">A · 3 · B</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">12</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">NE</div><div class="main"><div class="name">NE555P</div><div class="sub">Texas Instruments · DIP-8</div><div class="loc">A · 1 · C</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">47</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">AT</div><div class="main"><div class="name">ATMEGA328P-PU</div><div class="sub">Microchip · DIP-28</div><div class="loc">C · 1 · D</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">3</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">1N</div><div class="main"><div class="name">1N4148</div><div class="sub">Vishay · DO-35</div><div class="loc">B · 2 · A</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">210</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">BC</div><div class="main"><div class="name">BC547B</div><div class="sub">onsemi · TO-92</div><div class="loc">B · 1 · A</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">156</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">22</div><div class="main"><div class="name">22µF / 25V</div><div class="sub">Panasonic · Radial</div><div class="loc">D · 2 · C</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">8</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+            <div class="item"><div class="thumb">10</div><div class="main"><div class="name">10kΩ 1/4W</div><div class="sub">Yageo · Axial</div><div class="loc">E · 1 · A</div></div><div class="stepper compact"><span class="sign">−</span><span class="val">0</span><span class="sign">+</span></div></div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figcaption>
+      <b><span class="num">5</span>Même écran, thème sombre</b>
+      <span>Le thème suit automatiquement le réglage du téléphone : les deux jeux de couleurs sont définis dans <code>Theme.kt</code>. Une quantité à zéro passe en rouge, ce qui rend les ruptures de stock visibles d'un coup d'œil.</span>
+    </figcaption>
+  </figure>
+
+</div>
+
+<div class="notes">
+  <h3>Ce que cet aperçu est — et n'est pas</h3>
+  <ul>
+    <li>C'est une <strong>reconstitution</strong> de l'interface, pas une capture d'écran de l'application en fonctionnement : l'émulateur Android ne peut pas démarrer sur ce poste (hyperviseur Windows inactif, activation impossible sans droits administrateur et redémarrage).</li>
+    <li>Le texte, la structure, les espacements et les couleurs sont repris du code Compose réel : <code>app/src/main/java/fr/compozit/mobile/ui/</code> et <code>Theme.kt</code>.</li>
+    <li>Les composants affichés sont des <strong>exemples d'illustration</strong> — ils ne proviennent pas de ta base.</li>
+    <li>Le rendu final différera un peu : police Roboto, ombres Material 3 exactes, et surtout les <strong>images réelles</strong> chargées par Coil en vignette de 46 dp et en bandeau de 180 dp.</li>
+  </ul>
+</div>
+
+</body>
+</html>

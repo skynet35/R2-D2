@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="alert" id="detail-feedback" hidden>
+    <span data-fb-icon>✅</span>
+    <span data-fb-text></span>
+</div>
+
+<section class="card" data-project data-project-id="{{ detail.project.id }}">
+    <div class="card-head">
+        <h2>{{ detail.project.name }}</h2>
+        <span class="status-pill {{ detail.project.status_key }}" data-detail-status>{{ detail.project.status }}</span>
+        <span class="spacer"></span>
+        <a class="btn btn-sm btn-ghost" href="/projects">← Tous les projets</a>
+        <form method="post" action="/projects/{{ detail.project.id }}/delete"
+              data-confirm="Supprimer définitivement ce projet, ses composants liés et ses documents ?">
+            <button class="btn btn-sm danger" type="submit">🗑️ Supprimer</button>
+        </form>
+    </div>
+
+    <div class="card-body">
+        <nav class="tabs" data-tabs>
+            <button class="tab is-active" type="button" data-tab="overview">Vue d'ensemble</button>
+            <button class="tab" type="button" data-tab="components">
+                Composants <span class="tab-count" data-tab-count="components">{{ detail.stats.components }}</span>
+            </button>
+            <button class="tab" type="button" data-tab="items">
+                Travaux &amp; matériaux <span class="tab-count" data-tab-count="items">{{ detail.stats.items }}</span>
+            </button>
+            <button class="tab" type="button" data-tab="files">
+                Documents &amp; photos <span class="tab-count" data-tab-count="files">{{ detail.stats.files }}</span>
+            </button>
+        </nav>
+
+        <div id="detail-body">
+            {% include "_project_detail_body.html" %}
+        </div>
+
+        <!-- Modification d'une ligne de travaux / matériaux / service -->
+        <div class="loc-overlay" id="item-edit-modal" hidden>
+            <div class="loc-modal is-wide">
+                <div class="loc-modal-head">
+                    <h3>Modifier la ligne</h3>
+                    <button class="loc-modal-close" type="button" data-item-edit-close>✕</button>
+                </div>
+                <form id="prj-item-edit-form">
+                    <input type="hidden" id="item_edit_id">
+                    <div class="form-grid cols-3">
+                        <div class="field">
+                            <label for="item_edit_kind">Type</label>
+                            <select class="input" id="item_edit_kind">
+                                {% for type in detail.item_types %}
+                                <option value="{{ type.value }}">{{ type.label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="field span-2">
+                            <label for="item_edit_name">Libellé</label>
+                            <input class="input" id="item_edit_name" type="text" maxlength="255" required
+                                   placeholder="Ex : Soudure CMS, Plaque support…">
+                        </div>
+                        <div class="field">
+                            <label for="item_edit_quantity">Quantité</label>
+                            <input class="input" id="item_edit_quantity" type="number" step="0.5" min="0">
+                        </div>
+                        <div class="field">
+                            <label for="item_edit_unit">Unité</label>
+                            <input class="input" id="item_edit_unit" type="text" maxlength="50">
+                        </div>
+                        <div class="field">
+                            <label for="item_edit_unit_price">Prix unitaire</label>
+                            <input class="input" id="item_edit_unit_price" type="number" step="0.01" min="0">
+                        </div>
+                        <div class="field span-2">
+                            <label for="item_edit_description">Note</label>
+                            <input class="input" id="item_edit_description" type="text" maxlength="2000">
+                        </div>
+                    </div>
+                    <div class="loc-modal-actions">
+                        <button class="btn" type="submit">Enregistrer</button>
+                        <button class="btn btn-ghost" type="button" data-item-edit-close>Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
